@@ -29,15 +29,6 @@ Reservation: Manages room reservations and is linked to both Room and Guest.
 Service: Handles room service requests.
 Billing: Manages financial transactions, service charges, and payments.
 Inventory: Keeps track of room availability and amenities like mini-bar stock.
-Technologies Used
-Programming Language: Java
-Database: MySQL (or any relational database for persistence)
-Development Tools: IntelliJ IDEA, Eclipse, NetBeans
-Version Control: Git
-Installation & Setup
-Clone the repository:
- git clone https://github.com/your-repo/hotel-management-system.git
-cd hotel-management-system
 
 
 Compile and run the project:
