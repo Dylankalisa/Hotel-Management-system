@@ -1,0 +1,155 @@
+import java.util.*;
+
+// Abstract User class
+abstract class User {
+    protected String name;
+    protected String userId;
+    
+    public User(String name, String userId) {
+        this.name = name;
+        this.userId = userId;
+    }
+    
+    public String getName() { return name; }
+    public String getUserId() { return userId; }
+}
+
+// Guest class extending User
+class Guest extends User {
+    private List<Reservation> reservations;
+    
+    public Guest(String name, String userId) {
+        super(name, userId);
+        this.reservations = new ArrayList<>();
+    }
+    
+    public void addReservation(Reservation reservation) {
+        reservations.add(reservation);
+    }
+    
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+}
+
+// Staff class extending User
+class Staff extends User {
+    public Staff(String name, String userId) {
+        super(name, userId);
+    }
+}
+
+// Manager class extending User
+class Manager extends User {
+    public Manager(String name, String userId) {
+        super(name, userId);
+    }
+}
+
+// Administrator class extending User
+class Administrator extends User {
+    public Administrator(String name, String userId) {
+        super(name, userId);
+    }
+}
+
+// Room class
+class Room {
+    private int roomNumber;
+    private String type;
+    private boolean isOccupied;
+    
+    public Room(int roomNumber, String type) {
+        this.roomNumber = roomNumber;
+        this.type = type;
+        this.isOccupied = false;
+    }
+    
+    public int getRoomNumber() { return roomNumber; }
+    public String getType() { return type; }
+    public boolean isOccupied() { return isOccupied; }
+    public void setOccupied(boolean occupied) { isOccupied = occupied; }
+}
+
+// Reservation class
+class Reservation {
+    private Room room;
+    private Guest guest;
+    private Date checkIn;
+    private Date checkOut;
+    
+    public Reservation(Room room, Guest guest, Date checkIn, Date checkOut) {
+        this.room = room;
+        this.guest = guest;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+    }
+    
+    public Room getRoom() { return room; }
+    public Guest getGuest() { return guest; }
+}
+
+// Service class
+class Service {
+    private String description;
+    private double price;
+    
+    public Service(String description, double price) {
+        this.description = description;
+        this.price = price;
+    }
+    
+    public double getPrice() { return price; }
+}
+
+// Billing class
+class Billing {
+    private Guest guest;
+    private List<Service> services;
+    private double totalAmount;
+    
+    public Billing(Guest guest) {
+        this.guest = guest;
+        this.services = new ArrayList<>();
+        this.totalAmount = 0.0;
+    }
+    
+    public void addService(Service service) {
+        services.add(service);
+        totalAmount += service.getPrice();
+    }
+    
+    public double getTotalAmount() {
+        return totalAmount;
+    }
+}
+
+// Inventory class
+class Inventory {
+    private Map<String, Integer> stock;
+    
+    public Inventory() {
+        stock = new HashMap<>();
+    }
+    
+    public void addStock(String item, int quantity) {
+        stock.put(item, stock.getOrDefault(item, 0) + quantity);
+    }
+    
+    public int getStock(String item) {
+        return stock.getOrDefault(item, 0);
+    }
+}
+
+public class HotelManagementSystem {
+    public static void main(String[] args) {
+        // Sample Usage
+        Guest guest1 = new Guest("Dylan Kalisa", "G001");
+        Room room101 = new Room(101, "Deluxe");
+        
+        Reservation res1 = new Reservation(room101, guest1, new Date(), new Date());
+        guest1.addReservation(res1);
+        
+        System.out.println("Guest: " + guest1.getName() + " has reserved room " + res1.getRoom().getRoomNumber());
+    }
+}
